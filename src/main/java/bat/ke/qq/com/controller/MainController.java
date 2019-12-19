@@ -3,6 +3,7 @@ package bat.ke.qq.com.controller;
 import bat.ke.qq.com.common.ApiResult;
 import bat.ke.qq.com.common.Product;
 import bat.ke.qq.com.common.Table;
+import cn.hutool.core.util.RandomUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Controller
 public class MainController {
@@ -27,6 +29,10 @@ public class MainController {
 
         if (!Table.user.get(name).equals(password)) {
             return ApiResult.fail("密码不正确");
+        }
+
+        if (RandomUtil.randomInt(2)==0){
+            return ApiResult.fail("随机失败");
         }
 
         request.getSession().setAttribute("name", name);
